@@ -1,2 +1,2 @@
 # NLP-sentiment-analysis
-Analyze sentiment for conversational transcripts
+Analyze and visualize sentiment for conversational transcripts
