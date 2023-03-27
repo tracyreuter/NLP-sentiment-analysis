@@ -26,5 +26,5 @@ words %>% # visualize positive and negative words
   theme(panel.grid.minor = element_blank(), 
         panel.grid.major = element_blank(), 
         panel.border = element_rect(size=1, color='black'), 
-        legend.position = 'none', l
-        egend.title = element_blank())
+        legend.position = 'none', 
+        legend.title = element_blank())
