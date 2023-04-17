@@ -2,8 +2,9 @@ rm(list=ls(all=T))
 library(wordbankr)
 library(childesr)
 # # get words from transcripts with 1037 children across 57 English language corpora (~3.5 million word tokens)
-# tokens <- get_tokens(collection = "Eng-NA", role = "target_child", token = "*", db_version = "current")
-# write.csv(tokens, "CHILDES.words.csv", row.names = F)
+tokens <- get_tokens(collection = "Eng-NA", role = "target_child", token = "*", db_version = "current")
+# save tokenized results
+write.csv(tokens, "CHILDES.words.csv", row.names = F)
 tokens <- read.csv("CHILDES.words.csv", header = T)
 library(dplyr)
 words <- dplyr::select(tokens, stem) # get words
