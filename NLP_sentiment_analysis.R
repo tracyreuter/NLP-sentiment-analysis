@@ -77,7 +77,7 @@ words_sentiment <- words %>%
 top_n <- 20
 
 # Group data by sentiment (positive/negative) to find the top N for each
-words_sentiment %>%
+words_sentiment_summary <- words_sentiment %>%
   group_by(sentiment) %>%
   # Select the top N words (based on frequency 'n') within each group
   slice_max(n, n = top_n) %>%
@@ -85,10 +85,13 @@ words_sentiment %>%
   ungroup() %>%
   # Reorder the 'word' factor based on its frequency 'n'.
   # This makes the plot display from lowest to highest frequency.
-  mutate(word = reorder(word, n)) %>%
+  mutate(word = reorder(word, n))
 
-  # Generate plot
-  ggplot(aes(x = n, y = word, fill = sentiment)) +
+# Generate plot
+plot <- ggplot(
+  data = words_sentiment_summary,
+  aes(x = n, y = word, fill = sentiment)
+) +
   # Create a bar chart (geom_col is for when 'n' is a value)
   geom_col(show.legend = FALSE) +
   # Create two separate panels ("facets"): one for positive, one for negative
@@ -97,14 +100,17 @@ words_sentiment %>%
   # Add labels and theme
   labs(
     x = "Contribution to Sentiment (Frequency)",
-    y = NULL, # No y-axis label (the words are self-explanatory)
+    y = NULL, # Remove y-axis label (not necessary since words are shown)
     title = "Top 20 Positive and Negative Words in CHILDES (Eng-NA) Corpus"
   ) +
   # Use a clean black & white theme with a Times font
   theme_bw(base_family = "Times", base_size = 12) +
   theme(
-    panel.grid.minor = element_blank(),     # Remove minor grid lines
-    panel.grid.major = element_blank(),     # Remove major grid lines
-    panel.border = element_rect(size = 1, color = "black"), # Add a border
-    legend.position = "none"               # Hide the legend
+    panel.grid.minor = element_blank(), # Remove minor grid lines
+    panel.grid.major = element_blank(), # Remove major grid lines
+    panel.border = element_rect(linewidth = 1, color = "black"), # Add a border
+    legend.position = "none" # Hide the legend
   )
+
+# Display the plot
+print(plot)
