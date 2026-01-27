@@ -1,2 +1,3 @@
-# Exclude CHILDES data file
+# Exclude CHILDES data file for R and trainer_output directory for Python
 CHILDES.words.csv
+trainer_output/
